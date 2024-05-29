@@ -1,7 +1,13 @@
 import os
 import telebot
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()
+
+toekn = os.environ.get(toekn)
+url1 = os.environ.get("api_url1")
+url2 = os.environ.get("api_url2")
 
 bot = telebot.TeleBot('7067149281:AAGTfjDFxeFJQdhV76zL3QYPfDTsCr1rOWM')
 
@@ -32,7 +38,7 @@ def handle_file(message):
 
         # Отправляем файл на сервер FastAPI
         files = {'file': open(temp_file_path, 'rb')}
-        response = requests.post('https://re-production.up.railway.app/api/v1/products/upload', files=files)
+        response = requests.post(url1, files=files)
 
         if response.status_code == 200:
             bot.send_message(message.chat.id, "Файл успешно загружен и база данных обновлена.")
@@ -47,7 +53,7 @@ def handle_file(message):
 def get_all_products(message):
     try:
         # Выполняем GET-запрос к серверу FastAPI для получения файла Excel
-        response = requests.get('https://re-production.up.railway.app/api/v1/products/get/all')
+        response = requests.get(url2)
 
         if response.status_code == 200:
             # Создаем временный файл для сохранения содержимого файла Excel
