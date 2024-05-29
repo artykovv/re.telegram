@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-toekn = os.environ.get(toekn)
+toekn = os.environ.get("telegram_token")
 url1 = os.environ.get("api_url1")
 url2 = os.environ.get("api_url2")
 
-bot = telebot.TeleBot('7067149281:AAGTfjDFxeFJQdhV76zL3QYPfDTsCr1rOWM')
+bot = telebot.TeleBot(toekn)
 
 @bot.message_handler(commands=['start'])
 def start(message):
